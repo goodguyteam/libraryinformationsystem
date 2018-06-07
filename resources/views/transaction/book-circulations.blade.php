@@ -91,8 +91,9 @@
                             <th>Transaction Code</th>
                             <th>Book Borrowed</th>
                             <th>Borrower</th>
-                            <th>Date</th>
-                            <th>Status</th>
+                            <th>Borrowed Date</th>
+                            <th>Return Date</th>
+                            <th>Deadline</th>
                             <th width="100px">Actions</th>
                         </tr>
                         </thead>
@@ -104,10 +105,13 @@
                                 <td>
                                     {{ $borrowed->student_borrower_id ? \LIS\StudentInfo::where('id', $borrowed->student_borrower_id)->first()->first_name : \LIS\PersonnelInfo::where('id', $borrowed->personnel_borrower_id)->first()->first_name }} {{ $borrowed->student_borrower_id ? \LIS\StudentInfo::where('id', $borrowed->student_borrower_id)->first()->last_name : \LIS\PersonnelInfo::where('id', $borrowed->personnel_borrower_id)->first()->last_name }}
                                 </td>
-                                <td><b>Borrowed:</b><br/>{{ date('h:ia', strtotime($borrowed->date_borrowed)) }}<br/>{{ date('M d, Y', strtotime($borrowed->date_borrowed)) }}<br/><b>Returned:</b><br/> {{ $borrowed->date_returned > \Carbon\Carbon::now() ? 'N/A' : date('h:ia', strtotime($borrowed->date_returned)) }}<br/>{{ $borrowed->date_returned > \Carbon\Carbon::now() ? '' :  date('M d, Y', strtotime($borrowed->date_returned)) }}</td>
+                                <td>{{ date('h:ia', strtotime($borrowed->date_borrowed)) }}<br/>{{ date('M d, Y', strtotime($borrowed->date_borrowed)) }}</td>
+                                <td>{{ $borrowed->date_returned > \Carbon\Carbon::now() ? 'N/A' : date('h:ia', strtotime($borrowed->date_returned)) }}<br/>{{ $borrowed->date_returned > \Carbon\Carbon::now() ? '' :  date('M d, Y', strtotime($borrowed->date_returned)) }}</td>
                                 <td>{{ $borrowed->date_returned > \Carbon\Carbon::now() ? 'Currently Borrowed' : 'Returned Already' }}</td>
                                 <td width="100px">
-                                    <button class="btn btn-success" data-toggle="modal" data-target="#viewTransaction{{ $borrowed->id }}"><i class="livicon" data-name="eye-open" data-size="20" data-color="#fff" data-hc="#ccc" data-loop="true"></i></button> <button class="btn btn-danger" data-toggle="modal" data-target="#confirmReturn{{ $borrowed->id }}"><i class="livicon" data-name="sign-in" data-size="20" data-color="#fff" data-hc="#ccc" data-loop="true"></i></button>
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#viewTransaction{{ $borrowed->id }}"><i class="livicon" data-name="eye-open" data-size="20" data-color="#fff" data-hc="#ccc" data-loop="true"></i></button>
+                                    @if(\Illuminate\Support\Facades\DB::table('transactions')->where('book_copy_id', $borrowed->book_copy_id)->latest()->first()->date_returned > \Carbon\Carbon::now())<button class="btn btn-danger" data-toggle="modal" data-target="#confirmReturn{{ $borrowed->id }}"><i class="livicon" data-name="sign-in" data-size="20" data-color="#fff" data-hc="#ccc" data-loop="true"></i></button>
+                                        @endif
                                 </td>
                             </tr>
                         @endforeach
