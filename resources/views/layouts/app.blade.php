@@ -136,6 +136,53 @@
 <!-- begining of page level js -->
 @section('js')
 @show
+
+<script type="text/javascript">
+
+  $(document).on('click', '.create-modal', function(){
+    $('#create').modal('show');
+    $('.form-horizontal').show();
+    $('.modal-title').text('Dispose Book');
+  });
+  //function add (Save)
+  $("#add").click(function(){
+
+    var idofselect = document.getElementById('disposal-type');
+    var finalidselect = idofselect.options[idofselect.selectedIndex].value;
+    var valofremarks = document.getElementById('remarks').value;
+
+    // alert(finalidselect);
+    // alert(valofremarks);
+
+    $.ajax ({
+      type : 'POST',
+      url : '{{ route("disposal-infos.store") }}',
+      dataType: 'json',
+      data : {
+        '_token': $('input[name=_token]').val(),
+        disposal_type_id: finalidselect,
+        remarks: valofremarks
+      },
+
+      success: function(data){
+        alert('TAMA');
+
+      },
+
+      error: function(response) {
+        alert('MALI');
+      }
+
+    });
+    $('#disposal_type').val('');
+    $('#remarks').val('');
+  });
+
+
+
+
+</script>
+
 <!-- end of page level js -->
 </body>
 </html>

@@ -95,6 +95,11 @@
                         <i class="fa fa-angle-double-right"></i> Book Circulation
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('disposal-infos.index') }}">
+                        <i class="fa fa-angle-double-right"></i> Disposal List
+                    </a>
+                </li>
             </ul>
         </li>
         <li>
