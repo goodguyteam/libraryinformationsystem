@@ -23,24 +23,7 @@ class DisposalCRUDController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-      // $book_inventory = DB::table('book_inventories as binv')
-      // ->select('binv.id as id', 'binv.book_status_id as status_id',
-      // 'binv.book_info_id as bi_id', 'c.code as loc', 'binf.title as title',
-      // 'a.name as author', 'p.name as publisher', 'c.code as type', 's.name as status',
-      // 'binv.updated_at as date', 'binv.disposal_info_id' )
-      // ->join('book_infos as binf', 'binv.book_info_id', '=', 'binf.id')
-      // ->join('classifications as c', 'binf.class_id', '=', 'c.id')
-      // ->join('book_authors as ba', 'ba.book_id', '=', 'binf.id')
-      // ->join('authors as a', 'ba.author_id', '=', 'a.id')
-      // ->join('publishers as p', 'binf.publisher_id', '=', 'p.id')
-      // ->join('book_inventory_statuses as s', 'binv.book_status_id', '=', 's.id')
-      // ->join('acquisition_infos as ai', 'binv.acquisition_info_id', '=', 'ai.id')
-      // // ->join('disposal_infos as di', 'binv.disposal_info_id', '=', 'di.id')
-      // // ->join('disposal_types as dt', 'di.disposal_type_id', '=', 'dt.id')
-      // ->whereNull('binv.disposal_info_id')
-      // ->get();
-
+    {      
       $book_inventory = DB::table('book_inventories as binv')
       ->select('binv.id as id', 'binv.book_status_id as status_id',
       'binv.book_info_id as bi_id', 'ls.code as lcode', 'bs.book_sequence as bseq', 'binf.title as title',

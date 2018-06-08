@@ -43,7 +43,6 @@ Route::resource('/library-shelves', 'LibraryShelvesCRUDController');
 Route::resource('/shelf-sections', 'ShelfSectionsCRUDController');
 Route::resource('/book-circulations', 'BookCirculationCRUDController');
 Route::resource('/disposal-infos', 'DisposalCRUDController');
-
 Route::get('/print', 'ReportsController@genres')->name('report.genre');
 Route::get('/inventory-report', 'InventoryReportController@index')->name('report.inventory');
 Route::get('/inventory-pdf', 'InventoryPDFController@index')->name('report.inventorypdf');
