@@ -82,7 +82,7 @@
                         <tr>
                             <th>Author Name</th>
                             <th width="1">Gender</th>
-                            <th width="30px">Actions</th>
+                            <th width="100px">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -91,7 +91,8 @@
                                 <td>{{ $author->name }}</td>
                                 <td>{{ $author->gender }}</td>
                                 <td>
-                                    <button class="btn btn-success" data-toggle="modal" data-target="#editAuthor{{ $author->id }}"><i class="livicon" data-name="edit" data-size="20" data-color="#fff" data-hc="#ccc" data-loop="true"></i></button>
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#view{{ $author->id }}"><i class="livicon" data-name="eye-open" data-size="20" data-color="#fff" data-hc="#ccc" data-loop="true"></i></button>
+                                    <button class="btn btn-warning" data-toggle="modal" data-target="#editAuthor{{ $author->id }}"><i class="livicon" data-name="edit" data-size="20" data-color="#fff" data-hc="#ccc" data-loop="true"></i></button>
                                 </td>
                             </tr>
                         @endforeach

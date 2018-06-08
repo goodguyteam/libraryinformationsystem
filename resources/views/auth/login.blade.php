@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Login | Josh Admin Template</title>
+    <title>Login | Library Information System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- global level css -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -27,7 +27,7 @@
                         <form action="{{ route('login') }}" id="authentication" autocomplete="off" method="post">
                             {{ csrf_field() }}
                             <h3 class="black_bg">
-                                <img src="{{ asset('img/logo/1.png') }}" alt="logo" height="75">
+                                <img src="{{ asset('img/logo/logo.png') }}" alt="lis_logo" height="100">
                                 <br>Log In</h3>
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label style="margin-bottom:0;" for="email" class="uname control-label"> <i class="livicon" data-name="mail" data-size="16" data-loop="true" data-c="#3c8dbc" data-hc="#3c8dbc"></i> E-mail
@@ -71,8 +71,8 @@
                     <div id="forgot" class="animate form">
                         <form action="index.html" id="reset_pw" autocomplete="on" method="post">
                             <h3 class="black_bg">
-                                <img src="{{ asset('img/logo/1.png') }}" alt="logo" height="75">
-                                <br>FORGOT PASSWORD</h3>
+                                <img src="{{ asset('img/logo/logo.png') }}" alt="logo" height="75">
+                                <br><small class="white-text" style="color: #ffffff;">FORGOT PASSWORD</small></h3>
                             <p>
                                 Enter your email address below and we'll send a special reset password link to your inbox.
                             </p>
