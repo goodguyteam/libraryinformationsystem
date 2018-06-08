@@ -85,7 +85,7 @@
                             @foreach($students as $student)
                                 <tr>
                                     <td><img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(120)->margin(0)->backgroundColor(249,249,249)->generate($student->student_number))!!} " class="center-block"/></td>
-                                    <td><img src="{{ $student->image_path or Laravolt\Avatar\Facade::create($student->first_name.' '.$student->last_name)->setBorder(0, '#000')->toBase64() }}" width="100px" class="center-block img-circle"/></td>
+                                    <td><img src="{{ !is_null($student->image_path) ? asset($student->image_path) : Laravolt\Avatar\Facade::create($student->first_name.' '.$student->last_name)->setBorder(0, '#000')->toBase64() }}" width="100px" class="center-block img-circle"/></td>
                                     <td><p class="center-block text-center">{{ $student->last_name }}, {{ $student->first_name }}</p></td>
                                     <td><p class="center-block text-center">{{ $student->course }} {{ $student->year }}-{{ $student->section }}</p></td>
                                     <td>
@@ -183,35 +183,29 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header bg-primary">
-                                <h4 class="modal-title" id="modalLabelfade">Add New User</h4>
+                                <h4 class="modal-title" id="modalLabelfade">Update User Image</h4>
                             </div>
-                            <form method="post" action="{{ route('identity-management.store') }}">
+                            <form enctype="multipart/form-data" action="{{ route('student-management.update', $student->id) }}" method="POST">
                                 {{csrf_field()}}
-                                <input type="hidden" name="_method" value="POST" />
+                                <input type="hidden" name="_method" value="PATCH" />
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h4>Name</h4>
+                                            <h4>Current Image</h4>
                                             <p>
-                                                <input id="name" name="name" type="text" placeholder="Full Name" class="form-control">
+                                                <img src="{{ !is_null($student->image_path) ? asset($student->image_path) : Laravolt\Avatar\Facade::create($student->first_name.' '.$student->last_name)->setBorder(0, '#000')->toBase64() }}" width="100px" class="center-block img-circle" />
                                             </p>
                                         </div>
                                         <div class="col-md-12">
-                                            <h4>Email</h4>
+                                            <h4>Image</h4>
                                             <p>
-                                                <input id="email" name="email" type="text" placeholder="Email" class="form-control">
-                                            </p>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <h4>Password</h4>
-                                            <p>
-                                                <input id="password" name="password" type="password" placeholder="Password" class="form-control">
+                                                <input id="name" type="file" name="avatar" class="form-control">
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn  btn-primary">Add User</button>
+                                    <button class="btn  btn-primary">Update User Image</button>
                                 </div>
                             </form>
                         </div>

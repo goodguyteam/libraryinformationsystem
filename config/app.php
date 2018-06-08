@@ -182,7 +182,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
-        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -238,7 +239,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
-        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

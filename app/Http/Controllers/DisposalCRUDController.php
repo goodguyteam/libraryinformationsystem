@@ -73,6 +73,7 @@ class DisposalCRUDController extends Controller
       $dispose = new DisposalInfo();
        $dispose->disposal_type_id = Input::get('disposal_type_id');
        $dispose->remarks = Input::get('remarks');
+
        $dispose->save();
        return response()->json($dispose);
     }
