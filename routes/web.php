@@ -54,7 +54,4 @@ Route::get('/weeding-pdf', 'WeedingPDFController@index')->name('report.weedingpd
 Route::post('/android-login', 'AndroidScannerController@login')->name('android.login');
 Route::post('/android-logout', 'AndroidScannerController@logout')->name('android.logout');
 Route::post('/android-picture', 'AndroidScannerController@picture')->name('android.picture');
-<<<<<<< HEAD
-=======
 Route::get('/android-current-logs', 'AndroidScannerController@logs')->name('android.currentlogs');
->>>>>>> 5d4362de06a829f2ed1851fdc1fa6f4d494d6cc9
