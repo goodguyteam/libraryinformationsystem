@@ -112,7 +112,7 @@
                                     </td>
                                     <td>{{ $book_infos->where('id', $book_inventory->book_info_id)->first()->title }}</td>
                                     <td>
-                                        @foreach($book_authors as $book_author)
+                                        @foreach($book_authors->where('book_id', $book_inventory->book_info_id) as $book_author)
                                             @if($book_author->book_id == $book_inventory->book_info_id)
                                                 @if(!$loop->first)
                                                     , <br/>

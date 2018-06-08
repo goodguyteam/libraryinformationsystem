@@ -78,6 +78,18 @@ class UsersSeeder extends Seeder
         $genre->description = 'Programming Book';
         $genre->save();
 
+        $deadline = new \LIS\CirculationDeadlineSetup();
+        $deadline->code ='stud';
+        $deadline->name = 'Student Deadline';
+        $deadline->deadline = 3;
+        $deadline->save();
+
+        $deadline = new \LIS\CirculationDeadlineSetup();
+        $deadline->code ='fac';
+        $deadline->name = 'Faculty Deadline';
+        $deadline->deadline = 7;
+        $deadline->save();
+
         $genre = new \LIS\Subject();
         $genre->name = 'Motivational';
         $genre->description = 'Motivational Book';

@@ -111,13 +111,10 @@ class BookInventoriesCRUDController extends Controller
     public function update(Request $request, $id)
     {
         $inventory = BookInventory::where('id', $id)->first();
-        $inventory->isbn = $request->isbn;
-        $inventory->accession_number = $request->accession_number;
         $inventory->book_status_id = BookInventoryStatus::where('code', $request->book_status_code)->first()->id;
         $inventory->save();
 
         $shelving = BookShelving::where('id', $inventory->book_status_id)->first();
-        $shelving->call_number = $request->call_number;
         $shelving->book_sequence = $request->book_sequence;
         $shelving->save();
 

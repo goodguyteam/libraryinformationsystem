@@ -15,6 +15,9 @@ class CreateCirculationDeadlineSetupsTable extends Migration
     {
         Schema::create('circulation_deadline_setups', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code')->unique();
+            $table->string('name');
+            $table->integer('deadline');
             $table->timestamps();
         });
     }

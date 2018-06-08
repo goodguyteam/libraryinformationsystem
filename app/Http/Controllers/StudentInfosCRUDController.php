@@ -45,7 +45,31 @@ class StudentInfosCRUDController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new StudentInfo();
+        $user->student_number = $request->student_number;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->middle_name = $request->middle_name or null;
+
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $save_path = 'img\user_avatars\\';
+            $filename = 'IMG_' . str_random(4) . '_' . Carbon::now()->timestamp .  '.jpg';
+            if (!file_exists($save_path)) {
+                mkdir($save_path, 666, true);
+            }
+            ini_set('memory_limit', '512M');
+            $height = Image::make($avatar)->height();
+            $width = Image::make($avatar)->width();
+            if($width < $height)
+                Image::make($avatar)->crop($width, $width)->encode('jpg', 75)->save( public_path($save_path . $filename));
+            else
+                Image::make($avatar)->crop($height, $height)->encode('jpg', 75)->save( public_path($save_path . $filename));
+            $user->image_path = $save_path . $filename;
+
+        }
+        $user->save();
+        return redirect(route('student-management.index'))->with('message', 'Student Image Added Successfully');
     }
 
     /**

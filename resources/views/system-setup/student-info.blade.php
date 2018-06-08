@@ -109,33 +109,46 @@
                         <div class="modal-header bg-primary">
                             <h4 class="modal-title" id="modalLabelfade">Add New User</h4>
                         </div>
-                        <form method="post" action="{{ route('identity-management.store') }}">
+                        <form enctype="multipart/form-data" action="{{ route('student-management.store') }}" method="POST">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="POST" />
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4>Name</h4>
-                                        <p>
-                                            <input id="name" name="name" type="text" placeholder="Full Name" class="form-control">
-                                        </p>
+                                        <h4>Student Number</h4>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="text" name="student_number" class="form-control" />
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <h4>Email</h4>
-                                        <p>
-                                            <input id="email" name="email" type="text" placeholder="Email" class="form-control">
-                                        </p>
+                                        <div class="form-group">
+                                            <h4>Name</h4>
+                                            <div class="col-md-4">
+                                                <h5>Last Name</h5>
+                                                <input type="text" name="last_name" class="form-control"/>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>First Name</h5>
+                                                <input type="text" name="first_name" class="form-control"/>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Middle Name</h5>
+                                                <input type="text" name="middle_name" class="form-control"/>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <h4>Password</h4>
+                                        <h4>Image</h4>
                                         <p>
-                                            <input id="password" name="password" type="password" placeholder="Password" class="form-control">
+                                            <input id="name" type="file" name="avatar" class="form-control">
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn  btn-primary">Add User</button>
+                                <button class="btn  btn-primary">Add New Student</button>
                             </div>
                         </form>
                     </div>
