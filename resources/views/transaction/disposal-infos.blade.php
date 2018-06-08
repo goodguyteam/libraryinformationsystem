@@ -40,7 +40,7 @@
       //table31
     jQuery(document).ready(function() {
 
-        var table10 = $('#table10').DataTable({
+        var t1 = $('#t1').DataTable({
             "responsive":true
         });
 
@@ -48,7 +48,7 @@
             e.preventDefault();
 
             // Get the column API object
-            var column = table10.column($(this).attr('data-column'));
+            var column = t1.column($(this).attr('data-column'));
 
             // Toggle the visibility
             column.visible(!column.visible());
@@ -59,7 +59,7 @@
     //table32
   jQuery(document).ready(function() {
 
-      var table20 = $('#table20').DataTable({
+      var t2 = $('#t2').DataTable({
           "responsive":true
       });
 
@@ -67,7 +67,7 @@
           e.preventDefault();
 
           // Get the column API object
-          var column = table20.column($(this).attr('data-column'));
+          var column = t2.column($(this).attr('data-column'));
 
           // Toggle the visibility
           column.visible(!column.visible());
@@ -103,14 +103,13 @@
                         <button type="button" class="toggle-vis btn btn-default" data-column="5">Remarks</button>
                         <button type="button" class="toggle-vis btn btn-default" data-column="7">Date</button>
                     </div>
-                    <table class="table table-striped table-bordered" id="table10">
+                    <table class="table table-striped table-bordered" id="t1">
                         <thead>
                             <tr>
-                                <th>LOC</th>
+                                <th>CODE</th>
                                 <th>Title</th>
                                 <th>Author | Publisher</th>
-                                <th>Type</th>
-                                <!-- <th>Shelf</th> -->
+                                <th>Shelf</th>
                                 <th>Status</th>
                                 <th>Action</th>
                                 <th>Date</th>
@@ -121,7 +120,7 @@
                           <?php $no=1; ?>
                           @foreach($book_inventory as $key => $bi)
                             <tr class="book_inventory{{$bi->id}}">
-                                <td>{{$bi->loc}}</td>
+                                <td>{{$bi->lcode}} - {{ $bi->bseq }}</td>
                                 <td>{{$bi->title}}</td>
                                 <td>
                                   @foreach($book_authors as $book_author)
@@ -135,20 +134,13 @@
                                   <br>
                                   {{$bi->publisher}}
                                 </td>
-                                <td>
-                                  @if($bi->type== 'F385')
-                                    Theses
-                                  @else
-                                    Book
-                                  @endif
-                                </td>
-                                {{-- <td>{{$bi->shelf}}</td> --}}
+                                <td>{{$bi->shelf}}</td>
                                 <td>{{$bi->status}}</td>
                                 <td class = " text-center">
-                                  <a href="#" class="edit-modal btn btn-responsive btn-md btn-success" data-id="{{ $bi->id }}" data-status="{{ $bi->status_id }}" data-loc="{{ $bi->loc }}" data-title="{{ $bi->title }}" data-author="{{ $bi->author }}" data-pub="{{ $bi->publisher }}">
+                                  <a href="#" class="edit-modal btn btn-responsive btn-md btn-success" data-id="{{ $bi->id }}" data-status="{{ $bi->status_id }}" data-code="{{ $bi->lcode }}" data-title="{{ $bi->title }}" data-author="{{ $bi->author }}" data-pub="{{ $bi->publisher }}">
                                     <span class="glyphicon glyphicon-ok-sign"></span>
                                   </a>
-                                  <a href="#" class="create-modal btn btn-md btn-danger" data-id="{{ $bi->id }}" data-loc="{{ $bi->loc }}" data-title="{{ $bi->title }}" data-author="{{ $bi->author }}" data-pub="{{ $bi->publisher }}">
+                                  <a href="#" class="create-modal btn btn-md btn-danger" data-id="{{ $bi->id }}" data-code="{{ $bi->lcode  }}" data-title="{{ $bi->title }}" data-author="{{ $bi->author }}" data-pub="{{ $bi->publisher }}">
                                     <span class="glyphicon glyphicon-remove-sign"></span>
                                   </a>
                                 </td>
@@ -211,33 +203,6 @@
             <h4 class="modal-title"></h4>
           </div>
           <div class="modal-body">
-            <div class="row">
-              <div class="form-group">
-                  <label class="col-md-4 control-label">LOC :</label>
-                  <div class="col-md-8">
-                      <p class="form-control-static">{{ $bi->loc }}</p>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="col-md-4 control-label">Title :</label>
-                  <div class="col-md-8">
-                      <p class="form-control-static">{{ $bi->title }}</p>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="col-md-4 control-label">Author/s :</label>
-                  <div class="col-md-8">
-                      <p class="form-control-static">{{ $bi->author }}</p>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="col-md-4 control-label">Publisher :</label>
-                  <div class="col-md-8">
-                      <p class="form-control-static">{{ $bi->publisher }}</p>
-                  </div>
-              </div>
-            </div>
-
             <form class="form-horizontal" role="form" >
               <hr style="margin-top: -10px;">
               <div class="form-group">
@@ -295,43 +260,39 @@
                       <button type="button" class="toggle-vis btn btn-default" data-column="5">Remarks</button>
                       <button type="button" class="toggle-vis btn btn-default" data-column="6">Date</button>
                   </div>
-                  <table class="table table-striped table-bordered" id="table20">
+                  <table class="table table-striped table-bordered" id="t2">
                       <thead>
                           <tr>
-                              <th>LOC</th>
+                              <th>CODE</th>
                               <th>Title</th>
                               <th>Author | Publisher</th>
-                              <th>Type</th>
                               <th>Disposal Status</th>
                               <th>Remarks</th>
                               <th>Date</th>
                           </tr>
                       </thead>
                       <tbody>
+                        @foreach($book_inventory2 as $key => $bi)
                           <tr>
-                              <td>AC</td>
-                              <td>The Big Bad Wolf </td>
-                              <td>
-                                James Patterson,<br>
-                                Catnip Productions
-                              </td>
-                              <td>Book</td>
-                              <td>Condemned</td>
-                              <td>nasa kahon na po sa barracks</td>
-                              <td>May 10, 2018</td>
-                          </tr>
-                          <tr>
-                            <td>AC</td>
-                            <td>The Big Bad Wolf </td>
+                            <td>{{$bi->lcode}} - {{ $bi->bseq }}</td>
+                            <td>{{$bi->title}}</td>
                             <td>
-                              James Patterson,<br>
-                              Catnip Productions
+                              @foreach($book_authors as $book_author)
+                                  @if($book_author->book_id == $bi->bi_id)
+                                      @if(!$loop->first)
+                                          , <br/>
+                                      @endif
+                                      {{ $authors->where('id', $book_author->author_id)->first()->name }}
+                                  @endif
+                              @endforeach
+                              <br>
+                              {{$bi->publisher}}
                             </td>
-                            <td>Book</td>
-                            <td>Weeded</td>
-                            <td>wasak na po</td>
-                            <td>May 10, 2018</td>
+                            <td>{{$bi->status}}</td>
+                            <td>{{$bi->rem}}</td>
+                            <td>{{ \Carbon\Carbon::parse($bi->cdate)->format('M d, Y')}}</td>
                           </tr>
+                          @endforeach
                       </tbody>
                   </table>
               </div> <!-- end for table -->
