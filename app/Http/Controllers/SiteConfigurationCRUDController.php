@@ -4,6 +4,7 @@ namespace LIS\Http\Controllers;
 
 use Illuminate\Http\Request;
 use LIS\BusinessHours;
+use LIS\CirculationDeadlineSetup;
 use LIS\SystemInfo;
 
 class SiteConfigurationCRUDController extends Controller
@@ -22,7 +23,8 @@ class SiteConfigurationCRUDController extends Controller
     {
         $site_info = SystemInfo::first();
         $business_hours = BusinessHours::first();
-        return view('system-setup.site-configuration', compact('site_info', 'business_hours'));
+        $deadlines = CirculationDeadlineSetup::all();
+        return view('system-setup.site-configuration', compact('site_info', 'business_hours', 'deadlines'));
     }
 
     /**

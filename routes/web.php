@@ -52,5 +52,5 @@ Route::get('/weeding-report', 'WeedingReportController@index')->name('report.wee
 Route::get('/weeding-pdf', 'WeedingPDFController@index')->name('report.weedingpdf');
 Route::post('/android-login', 'AndroidScannerController@login')->name('android.login');
 Route::post('/android-logout', 'AndroidScannerController@logout')->name('android.logout');
-Route::post('/android-picture', 'AndroidScannerController@picture')->name('android.picture');
+Route::get('/android-picture', 'AndroidScannerController@picture')->name('android.picture');
 Route::get('/android-current-logs', 'AndroidScannerController@logs')->name('android.currentlogs');

@@ -136,6 +136,39 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">Configure Deadline for Circulation</div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-body">
+                                <h3>Circulation Deadline</h3>
+                                @foreach($deadlines as $deadline)
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a href="#" class="link link-black form-control-static" data-toggle="modal" data-target="#update{{ $deadline->code }}">
+                                                <div class="form-group">
+                                                    <label class="col-md-4 control-label">{{ $deadline->name }} :</label>
+                                                    <div class="col-md-8">
+                                                        <p class="form-control-static text-black">{{ $deadline->deadline }} day/s
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 @endsection
 

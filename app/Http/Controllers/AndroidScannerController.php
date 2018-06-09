@@ -42,7 +42,7 @@ class AndroidScannerController extends Controller
     public function picture(Request $request){
         $picture = StudentInfo::where('student_number', $request->student_no_post2)->first()->image_path;
         if(isset($picture)){
-            return $picture;
+            return asset($picture);
         }
         return '';
     }
