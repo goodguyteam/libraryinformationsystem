@@ -75,6 +75,7 @@
 
   });
 
+
     </script>
 
 
@@ -184,7 +185,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn actionBtn">
-              <span id="footer_action_button" class="glyphicon"></span>
+              <span id="update" class="glyphicon"></span>
             </button>
             <button type="button" class="btn btn-warning" data-dismiss="modal">
               <span class="glyphicon glyphicon"></span>Close

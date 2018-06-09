@@ -23,7 +23,7 @@ class DisposalCRUDController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {      
+    {
       $book_inventory = DB::table('book_inventories as binv')
       ->select('binv.id as id', 'binv.book_status_id as status_id',
       'binv.book_info_id as bi_id', 'ls.code as lcode', 'bs.book_sequence as bseq', 'binf.title as title',
@@ -64,6 +64,9 @@ class DisposalCRUDController extends Controller
       $book_authors = BookAuthor::all();
       $acquisition_infos = AcquisitionInfo::all();
       $authors = Author::all();
+
+      // $bi_Update = BookInventory::select('id', 'book_status_id', 'disposal_info_id')
+      // return Datatables::of($bi_update)
 
       return view('transaction.disposal-infos', compact('book_inventory', 'book_inventory2', 'types', 'book_authors', 'acquisition_infos', 'authors'));
     }
