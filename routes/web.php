@@ -54,6 +54,8 @@ Route::get('/circulation-report', 'CirculationReportController@index')->name('re
 Route::get('/circulation-pdf', 'CirculationPDFController@index')->name('report.circulationpdf');
 Route::get('/missing-report', 'MissingReportController@index')->name('report.missing');
 Route::get('/missing-pdf', 'MissingPDFController@index')->name('report.missingpdf');
+Route::get('/visitor-report', 'VisitorReportController@index')->name('report.visitor');
+Route::get('/visitor-pdf', 'VisitorPDFController@index')->name('report.visitorpdf');
 Route::post('/android-login', 'AndroidScannerController@login')->name('android.login');
 Route::post('/android-logout', 'AndroidScannerController@logout')->name('android.logout');
 Route::get('/android-picture', 'AndroidScannerController@picture')->name('android.picture');

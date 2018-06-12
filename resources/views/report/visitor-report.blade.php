@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Missing Report')
+@section('title', 'Visitor Log')
 
 @section('css')
     <link href="{{ 'vendors/jasny-bootstrap/css/jasny-bootstrap.cs' }}s" rel="stylesheet">
@@ -63,7 +63,7 @@
           <div class="panel panel-primary">
               <div class="panel-heading">
                   <h3 class="panel-title">
-                      <i class="livicon" data-name="doc-portrait" data-c="#fff" data-hc="#fff" data-size="18" data-loop="true"></i> Missing
+                      <i class="livicon" data-name="doc-portrait" data-c="#fff" data-hc="#fff" data-size="18" data-loop="true"></i> Visitor
                   </h3>
                   <span class="pull-right">
                       <i class="fa fa-fw fa-chevron-up clickable"></i>
@@ -81,16 +81,16 @@
                   </div>
 
                   <div class="btn-group" style="margin-left: 655px">
-                      <a href="{{ route('report.missingpdf')  }}" class="btn btn-info">Print <span class="glyphicon glyphicon-print"></span></a>
+                      <a href="" class="btn btn-info">Print <span class="glyphicon glyphicon-print"></span></a>
                   </div>
 
                   <table class="table table-striped table-bordered" id="table33">
                       <thead>
                           <tr>
-                              <th>Call Number</th>
-                              <th>Title</th>
-                              <th>Author</th>
-                              <th>Date Acquired</th>
+                              <th>Name</th>
+                              <th>Date</th>
+                              <th>Time In</th>
+                              <th>Time Out</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -108,29 +108,25 @@ if ($conn->connect_error) {
 } 
 
 $sql = "SELECT
-    BS.call_number as cn,
-    BIN.title as title,
-    GROUP_CONCAT(A.name SEPARATOR ', ') as author,
-    AI.date_acquired as da
+    CONCAT(
+            I.first_name,
+            ' ',
+            I.middle_name,
+            ' ',
+            I.last_name
+        ) as Name,
+        l.log_date as logdate,
+        l.time_in as timein,
+        l.time_out as timeout
 FROM
-    book_inventories BI
-INNER JOIN book_shelvings BS ON
-    BI.shelving_id = BS.id
-INNER JOIN book_infos BIN ON
-    BI.book_info_id = BIN.id
-INNER JOIN book_authors BA ON
-    BIN.id = BA.book_id
-INNER JOIN authors A ON
-    BA.author_id = A.id
-INNER JOIN acquisition_infos AI ON
-    BI.acquisition_info_id = AI.id
-    WHERE missing_info_id IS NOT NULL
-	    GROUP BY BI.id";
+    library_logs L
+INNER JOIN student_infos I ON
+    L.student_number = I.student_number";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
 	while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["cn"]."</td><td>".$row["title"]."</td><td>".$row["author"]."</td><td>".$row["da"]."</td></tr>";
+        echo "<tr><td>".$row["Name"]."</td><td>".$row["logdate"]."</td><td>".$row["timein"]."</td><td>".$row["timeout"]."</td></tr>";
     }
 } else {
     echo "0 results";

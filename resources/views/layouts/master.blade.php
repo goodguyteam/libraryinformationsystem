@@ -100,6 +100,7 @@
                         <i class="fa fa-angle-double-right"></i> Disposal List
                     </a>
                 </li>
+				
             </ul>
         </li>
         <li>
@@ -146,6 +147,11 @@
 				                <li>
                     <a href="{{ route('report.missing') }}">
                         <i class="fa fa-angle-double-right"></i> Missing
+                    </a>
+                </li>
+								                <li>
+                    <a href="{{ route('report.visitor') }}">
+                        <i class="fa fa-angle-double-right"></i> Visitor Log
                     </a>
                 </li>
             </ul>
