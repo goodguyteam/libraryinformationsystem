@@ -19,9 +19,9 @@ INNER JOIN courses C ON
  <html>  
       <head>  
            <title>Visitor's Log Report</title>  
-           <script type="text/javascript" src="{{ 'vendors/forreport/loader.js' }}"></script>
-           <script type="text/javascript" src="{{ 'vendors/forreport/jspdf.min.js' }}"></script>
-           <script type="text/javascript" src="{{ 'vendors/forreport/logoreport.js' }}"></script>
+           <script type="text/javascript" src="loader.js"></script>
+           <script type="text/javascript" src="jspdf.min.js"></script>
+           <script type="text/javascript" src="logoreport.js"></script>
            <script type="text/javascript">  
            google.charts.load('current', {'packages':['corechart']});  
            google.charts.setOnLoadCallback(drawChart);  

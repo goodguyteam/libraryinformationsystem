@@ -81,7 +81,7 @@
                   </div>
 
                   <div class="btn-group" style="margin-left: 655px">
-                      <a href="" class="btn btn-info">Print <span class="glyphicon glyphicon-print"></span></a>
+                      <a href="{{ route('report.visitorpdf')  }}" class="btn btn-info">Print <span class="glyphicon glyphicon-print"></span></a>
                   </div>
 
                   <table class="table table-striped table-bordered" id="table33">
