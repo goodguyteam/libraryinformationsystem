@@ -118,13 +118,14 @@ INNER JOIN book_shelvings BS ON
     BI.shelving_id = BS.id
 INNER JOIN book_infos BIN ON
     BI.book_info_id = BIN.id
-RIGHT JOIN book_authors BA ON
+INNER JOIN book_authors BA ON
     BIN.id = BA.book_id
 INNER JOIN authors A ON
     BA.author_id = A.id
 INNER JOIN acquisition_infos AI ON
     BI.acquisition_info_id = AI.id
-    GROUP BY BI.id";
+    WHERE missing_info_id IS NOT NULL
+	    GROUP BY BI.id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

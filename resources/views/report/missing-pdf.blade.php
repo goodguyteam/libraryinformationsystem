@@ -24,13 +24,13 @@ class myPDF extends FPDF{
 		$this->SetFont('Times','B',12);
 		$this->Cell(60,10,'Call Number',1,0,'C');
 		$this->Cell(70,10,'Title',1,0,'C');
-		$this->Cell(77,10,'Author',1,0,'C');
+		$this->Cell(70,10,'Author',1,0,'C');
 		$this->Cell(70,10,'Date Acquired',1,0,'C');
 		$this->Ln();
 	}
 	function viewTable($db){
 		$this->SetFont('Times','',12);
-		$stmt = $db->query("SELECT
+		$stmt = $db->query('SELECT
     BS.call_number as cn,
     BIN.title as title,
     GROUP_CONCAT(A.name SEPARATOR ', ') as author,
@@ -41,17 +41,17 @@ INNER JOIN book_shelvings BS ON
     BI.shelving_id = BS.id
 INNER JOIN book_infos BIN ON
     BI.book_info_id = BIN.id
-RIGHT JOIN book_authors BA ON
+INNER JOIN book_authors BA ON
     BIN.id = BA.book_id
 INNER JOIN authors A ON
     BA.author_id = A.id
 INNER JOIN acquisition_infos AI ON
     BI.acquisition_info_id = AI.id
-        GROUP BY BI.id");
+	    GROUP BY BI.id');
 		while ($data = $stmt->fetch(PDO::FETCH_OBJ)){
 			$this->Cell(60,10,$data->cn,1,0,'C');
 			$this->Cell(70,10,$data->title,1,0,'C');
-			$this->Cell(77,10,$data->author,1,0,'C');
+			$this->Cell(70,10,$data->author,1,0,'C');
 			$this->Cell(70,10,$data->da,1,0,'C');
 			$this->Ln();
 		}

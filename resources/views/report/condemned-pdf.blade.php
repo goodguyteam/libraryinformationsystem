@@ -4,9 +4,9 @@ $db = new PDO('mysql:host=localhost;dbname=libraryinformationsystem','root','');
 
 class myPDF extends FPDF{
 	function header(){
-		$this->Image(asset('img/logo/1.png'),10,6);
+		$this->Image(asset('img/logo/logoreport.png'),10,6);
 		$this->SetFont('Arial','B',14);
-		$this->Cell(276,5,'LIBRARY INFORMATION SYSTEM',0,0,'C');
+		$this->Cell(276,5,'RESOURCE LEARNING CENTER',0,0,'C');
 		$this->Ln();
 		$this->SetFont('Times','',12);
 		$this->Cell(276,10,'Polytechnic University of the Philippines',0,0,'C');
@@ -24,7 +24,7 @@ class myPDF extends FPDF{
 		$this->SetFont('Times','B',12);
 		$this->Cell(60,10,'Call Number',1,0,'C');
 		$this->Cell(70,10,'Title',1,0,'C');
-		$this->Cell(70,10,'Author',1,0,'C');
+		$this->Cell(77,10,'Author',1,0,'C');
 		$this->Cell(70,10,'Date Acquired',1,0,'C');
 		$this->Ln();
 	}
@@ -33,7 +33,7 @@ class myPDF extends FPDF{
 		$stmt = $db->query("SELECT
     BS.call_number as cn,
     BIN.title as title,
-    A.name as author,
+    GROUP_CONCAT(A.name SEPARATOR ', ') as author,
     AI.date_acquired as da
 FROM
     book_inventories BI
@@ -51,11 +51,12 @@ INNER JOIN disposal_infos DI ON
     BI.disposal_info_id = DI.id
 INNER JOIN disposal_types DT ON
     DI.disposal_type_id = DT.id
-    WHERE DT.name='Condemned'");
+    WHERE DT.name='Condemned'
+	    GROUP BY BI.id");
 		while ($data = $stmt->fetch(PDO::FETCH_OBJ)){
 			$this->Cell(60,10,$data->cn,1,0,'C');
 			$this->Cell(70,10,$data->title,1,0,'C');
-			$this->Cell(70,10,$data->author,1,0,'C');
+			$this->Cell(77,10,$data->author,1,0,'C');
 			$this->Cell(70,10,$data->da,1,0,'C');
 			$this->Ln();
 		}

@@ -110,7 +110,7 @@ if ($conn->connect_error) {
 $sql = "SELECT
     BS.call_number as cn,
     BIN.title as title,
-    A.name as author,
+    GROUP_CONCAT(A.name SEPARATOR ', ') as author,
     AI.date_acquired as da
 FROM
     book_inventories BI
@@ -128,7 +128,8 @@ INNER JOIN disposal_infos DI ON
     BI.disposal_info_id = DI.id
 INNER JOIN disposal_types DT ON
     DI.disposal_type_id = DT.id
-    WHERE DT.name='Condemned'";
+    WHERE DT.name='Condemned'
+	    GROUP BY BI.id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

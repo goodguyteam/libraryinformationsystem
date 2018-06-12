@@ -129,7 +129,7 @@
                     </a>
                 </li>
 				                <li>
-                    <a href="{{ route('report.genre') }}">
+                    <a href="{{ route('report.circulation') }}">
                         <i class="fa fa-angle-double-right"></i> Circulation
                     </a>
                 </li>
@@ -144,7 +144,7 @@
                     </a>
                 </li>
 				                <li>
-                    <a href="{{ route('report.genre') }}">
+                    <a href="{{ route('report.missing') }}">
                         <i class="fa fa-angle-double-right"></i> Missing
                     </a>
                 </li>

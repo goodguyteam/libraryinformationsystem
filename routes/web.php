@@ -50,6 +50,10 @@ Route::get('/condemned-report', 'CondemnedReportController@index')->name('report
 Route::get('/condemned-pdf', 'CondemnedPDFController@index')->name('report.condemnedpdf');
 Route::get('/weeding-report', 'WeedingReportController@index')->name('report.weeding');
 Route::get('/weeding-pdf', 'WeedingPDFController@index')->name('report.weedingpdf');
+Route::get('/circulation-report', 'CirculationReportController@index')->name('report.circulation');
+Route::get('/circulation-pdf', 'CirculationPDFController@index')->name('report.circulationpdf');
+Route::get('/missing-report', 'MissingReportController@index')->name('report.missing');
+Route::get('/missing-pdf', 'MissingPDFController@index')->name('report.missingpdf');
 Route::post('/android-login', 'AndroidScannerController@login')->name('android.login');
 Route::post('/android-logout', 'AndroidScannerController@logout')->name('android.logout');
 Route::get('/android-picture', 'AndroidScannerController@picture')->name('android.picture');

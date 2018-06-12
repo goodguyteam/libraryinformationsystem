@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Inventory Report')
+@section('title', 'Circulation Report')
 
 @section('css')
     <link href="{{ 'vendors/jasny-bootstrap/css/jasny-bootstrap.cs' }}s" rel="stylesheet">
@@ -63,7 +63,7 @@
           <div class="panel panel-primary">
               <div class="panel-heading">
                   <h3 class="panel-title">
-                      <i class="livicon" data-name="doc-portrait" data-c="#fff" data-hc="#fff" data-size="18" data-loop="true"></i> Inventory
+                      <i class="livicon" data-name="doc-portrait" data-c="#fff" data-hc="#fff" data-size="18" data-loop="true"></i> Circulation
                   </h3>
                   <span class="pull-right">
                       <i class="fa fa-fw fa-chevron-up clickable"></i>
@@ -81,16 +81,16 @@
                   </div>
 
                   <div class="btn-group" style="margin-left: 655px">
-                      <a href="{{ route('report.inventorypdf')  }}" class="btn btn-info">Print <span class="glyphicon glyphicon-print"></span></a>
+                      <a href="{{ route('report.circulationpdf')  }}" class="btn btn-info">Print <span class="glyphicon glyphicon-print"></span></a>
                   </div>
 
                   <table class="table table-striped table-bordered" id="table33">
                       <thead>
                           <tr>
-                              <th>Call Number</th>
-                              <th>Title</th>
-                              <th>Author</th>
-                              <th>Date Acquired</th>
+                              <th>Borrower</th>
+                              <th>Book Title</th>
+                              <th>Date Borrowed</th>
+                              <th>Date Returned</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -108,30 +108,51 @@ if ($conn->connect_error) {
 } 
 
 $sql = "SELECT
-    BS.call_number as cn,
-    BIN.title as title,
-    GROUP_CONCAT(A.name SEPARATOR ', ') as author,
-    AI.date_acquired as da
+    IFNULL(
+        CONCAT(
+            SI.first_name,
+            ' ',
+            SI.middle_name,
+            ' ',
+            SI.last_name
+        ),
+        CONCAT(
+            PI.first_name,
+            ' ',
+            PI.middle_name,
+            ' ',
+            PI.last_name
+        )
+    ) AS Borrower,
+    BI.title AS Book,
+    date_borrowed AS Borrowed,
+    date_returned AS Returned
 FROM
-    book_inventories BI
-INNER JOIN book_shelvings BS ON
-    BI.shelving_id = BS.id
-INNER JOIN book_infos BIN ON
-    BI.book_info_id = BIN.id
-RIGHT JOIN book_authors BA ON
-    BIN.id = BA.book_id
-INNER JOIN authors A ON
-    BA.author_id = A.id
-INNER JOIN acquisition_infos AI ON
-    BI.acquisition_info_id = AI.id
-    GROUP BY BI.id";
+    transactions T
+LEFT JOIN student_infos SI ON
+    SI.id = T.student_borrower_id
+LEFT JOIN personnel_infos PI ON
+    PI.id = T.personnel_borrower_id
+INNER JOIN book_infos BI ON
+    BI.id = t.book_copy_id";
+	
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
 	while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["cn"]."</td><td>".$row["title"]."</td><td>".$row["author"]."</td><td>".$row["da"]."</td></tr>";
+        echo
+		"<tr><td>"
+		.$row["Borrower"].
+		"</td><td>"
+		.$row["Book"].
+		"</td><td>"
+		.$row["Borrowed"].
+		"</td><td>"
+		.$row["Returned"].
+		"</td></tr>";
     }
-} else {
+} 
+else {
     echo "0 results";
 }
 $conn->close();
